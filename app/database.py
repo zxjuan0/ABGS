@@ -1,13 +1,33 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+# app/models.py
+from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
+from datetime import datetime
+from app.database import Base
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./abgs.db"  # local DB
+class User(Base):
+    __tablename__ = "users"
+    id        = Column(Integer, primary_key=True, index=True)
+    username  = Column(String, unique=True, index=True)
+    email     = Column(String, unique=True, index=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    goals     = relationship("Goal", back_populates="owner")
 
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
+class Goal(Base):
+    __tablename__ = "goals"
+    id          = Column(Integer, primary_key=True, index=True)
+    title       = Column(String, nullable=False)
+    description = Column(String)
+    user_id     = Column(Integer, ForeignKey("users.id"))
+    created_at  = Column(DateTime, default=datetime.utcnow)
+    is_active   = Column(Boolean, default=True)
+    owner       = relationship("User", back_populates="goals")
+    checkins    = relationship("CheckIn", back_populates="goal")
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base()
+class CheckIn(Base):
+    __tablename__ = "checkins"
+    id          = Column(Integer, primary_key=True, index=True)
+    goal_id     = Column(Integer, ForeignKey("goals.id"))
+    user_id     = Column(Integer, ForeignKey("users.id"))
+    checked_in_at = Column(DateTime, default=datetime.utcnow)
+    notes       = Column(String, nullable=True)
+    goal        = relationship("Goal", back_populates="checkins")

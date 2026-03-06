@@ -1,12 +1,14 @@
-from sqlalchemy import Column, Integer, String, DateTime
-from app.database import Base
+# app/models.py
+from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 from datetime import datetime
+from app.database import Base
 
-class CheckIn(Base):
-    __tablename__ = "checkins"
-
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, index=True)
-    goal_name = Column(String, index=True)
-    status = Column(String)  # "completed" or "missed"
-    timestamp = Column(DateTime, default=datetime.utcnow)
+class User(Base):
+    __tablename__ = "users"
+    id        = Column(Integer, primary_key=True, index=True)
+    username  = Column(String, unique=True, index=True)
+    email     = Column(String, unique=True, index=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    goals     = relationship("Goal", back_populates="owner")
+class Goal(Base):

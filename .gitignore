@@ -1,7 +1,8 @@
+# .gitignore
 venv/
 __pycache__/
 *.pyc
-.env
 *.db
+.env
 ml/models/*.joblib
 .DS_Store
