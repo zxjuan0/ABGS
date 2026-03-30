@@ -1,8 +1,10 @@
-# app/main.py  (updated)
+# app/main.py  
 from fastapi import FastAPI
 from app.database import Base, engine
 from app import models
 from app.routes import checkins, goals
+from app.routes import predict
+
 
 Base.metadata.create_all(bind=engine)   # Creates tables on startup
 
@@ -14,6 +16,7 @@ app = FastAPI(
 
 app.include_router(checkins.router)
 app.include_router(goals.router)
+app.include_router(predict.router)
 
 @app.get("/")
 def root(): return {"message": "ABGS running"}
