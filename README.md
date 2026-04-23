@@ -1,30 +1,39 @@
-🧠 ABGS | Adaptive Behavior Goal System | 
+# 🧠 ABGS | Adaptive Behavior Goal System |
 
 An AI-powered habit tracking platform that predicts user dropout risk and provides adaptive behavioral insights.
 
-🚀 Overview
+---
 
-Most habit tracking applications are reactive and lack interactive UI. 
+## 🚀 Overview
+
+Most habit tracking applications are reactive and lack interactive UI.  
 They show past progress but fail to anticipate future failure.
 
-ABGS (Adaptive Behavior Goal System) addresses this gap by combining behavioral data collection, machine learning prediction, and real-time user feedback.
+ABGS (Adaptive Behavior Goal System) addresses this gap by combining behavioral data collection, machine learning prediction, and real-time user feedback.  
 The system analyzes user engagement patterns and predicts the likelihood of habit dropout before it happens, enabling proactive intervention and smarter habit formation.
 
-🧩 Key Features
-Daily Check-In System
+---
+
+## 🧩 Key Features
+
+**Daily Check-In System**  
 Users log completed habits through a clean, interactive interface.
-Behavior Tracking Dashboard
+
+**Behavior Tracking Dashboard**  
 Displays streaks, progress, and weekly trends.
-Machine Learning Prediction
+
+**Machine Learning Prediction**  
 A trained model analyzes behavioral features to estimate dropout probability.
-Risk Classification
+
+**Risk Classification**  
 Users are categorized into Low, Medium, or High risk levels.
-Adaptive Insights Panel
+
+**Adaptive Insights Panel**  
 Provides recommendations based on predicted user behavior.
 
+---
 
-🏗️ System Architecture
-
+## 🏗️ System Architecture
 Frontend (React)
 ↓
 API Layer (Axios)
@@ -35,46 +44,49 @@ ML Model (Random Forest)
 ↓
 Prediction Output → UI Dashboard
 
-🧠 Machine Learning Model
 
-Model Type: Random Forest Classifier
-Training Data: Simulated user habit behavior dataset
+---
 
-Output:
+## 🧠 Machine Learning Model
 
-Dropout probability (0–1)
-Risk level classification (Low / Medium / High)
+Model Type: Random Forest Classifier  
+Training Data: Simulated user habit behavior dataset  
 
-Features Used:
+**Output:**
+- Dropout probability (0–1)  
+- Risk level classification (Low / Medium / High)
 
-streak_length
-missed_days_last_7
-checkin_hour_avg
-engagement_freq
-days_since_last
-goal_age_days
-🖥️ Tech Stack
+**Features Used:**
+- streak_length  
+- missed_days_last_7  
+- checkin_hour_avg  
+- engagement_freq  
+- days_since_last  
+- goal_age_days  
 
-Frontend:
+---
 
-React (Vite)
-Tailwind CSS
-Recharts
-Axios
+## 🖥️ Tech Stack
 
-Backend:
+**Frontend:**
+- React (Vite)  
+- Tailwind CSS  
+- Recharts  
+- Axios  
 
-FastAPI
-Python
+**Backend:**
+- FastAPI  
+- Python  
 
-Machine Learning:
+**Machine Learning:**
+- Scikit-learn  
+- Pandas  
+- NumPy  
+- Joblib  
 
-Scikit-learn
-Pandas
-NumPy
-Joblib
-📂 Project Structure
+---
 
+## 📂 Project Structure
 ABGS/
 ├── app/ (FastAPI backend)
 ├── ml/ (ML model + training)
@@ -82,30 +94,41 @@ ABGS/
 ├── data/
 └── README.md
 
-⚙️ Setup Instructions
 
-Backend:
-cd ABGS
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
+
+---
+
+## ⚙️ Setup Instructions
+
+**Backend:**
+
+cd ABGS  
+python -m venv venv  
+venv\Scripts\activate  
+pip install -r requirements.txt  
 
 Run backend:
-uvicorn app.main:app --reload
 
-Frontend:
-cd frontend
-npm install
-npm run dev
+uvicorn app.main:app --reload  
 
-Frontend runs on:
-http://localhost:5173
+---
 
-🔌 API Endpoint
+**Frontend:**
 
-POST /predict
+cd frontend  
+npm install  
+npm run dev  
 
-Request:
+Frontend runs on:  
+http://localhost:5173  
+
+---
+
+## 🔌 API Endpoint
+
+POST /predict  
+
+**Request:**
 {
 "streak_length": 7,
 "missed_days_last_7": 2,
@@ -115,36 +138,49 @@ Request:
 "goal_age_days": 30
 }
 
-Response:
+
+**Response:**
 {
 "dropout_probability": 0.62,
 "risk_level": "medium"
 }
 
 
-🎥 Demo Flow
-User completes daily check-in
-Behavioral data is captured
-Data is sent to backend API
-ML model predicts dropout risk
-Dashboard displays risk badge, probability, and adaptive insight
+---
 
+## 🎥 Demo Flow
 
-🧪 Future Improvements
-Database integration
-LLM-powered personalized coaching
-User authentication
-Mobile optimization
-🎓 Academic Context
+- User completes daily check-in  
+- Behavioral data is captured  
+- Data is sent to backend API  
+- ML model predicts dropout risk  
+- Dashboard displays risk badge, probability, and adaptive insight  
 
-This project was developed as a Capstone Project for Applied AI, demonstrating full-stack development, machine learning integration, and people centered design.
+---
 
-👤 Author
+## 🧪 Future Improvements
 
-Juan Pulido
-Applied AI
-Miami Dade College
+- Database integration  
+- LLM-powered personalized coaching  
+- User authentication  
+- Mobile optimization  
 
-📌 Final Note
+---
 
-ABGS demonstrates how AI can move beyond tracking behavior to predicting and improving it, enabling smarter and more adaptive user experiences.
+## 🎓 Academic Context
+
+This project was developed as a Capstone Project for Applied AI, demonstrating full-stack development, machine learning integration, and people-centered design.
+
+---
+
+## 👤 Author
+
+Juan Pulido  
+Applied AI  
+Miami Dade College  
+
+---
+
+## 📌 Final Note
+
+ABGS demonstrates how AI can move beyond tracking behavior to predicting and improving it, enabling smarter and more adaptive user experiences, simply by engaging in  positive reinforcement learning and friendly user interface.
