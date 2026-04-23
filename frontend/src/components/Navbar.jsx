@@ -1,35 +1,34 @@
-import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, CheckSquare, BarChart2 } from 'lucide-react';
-const links = [
-{ to: '/', label: 'Dashboard', Icon: LayoutDashboard },
-{ to: '/checkin', label: 'Check-In', Icon: CheckSquare },
-{ to: '/summary', label: 'Summary', Icon: BarChart2 },
-];
+import { Link, useLocation } from "react-router-dom";
+
 export default function Navbar() {
-return (
-<nav className='bg-white border-b border-gray-100 sticky top-0 z-10'>
-<div className='max-w-5xl mx-auto px-4 h-14 flex items-center justify-between'
->
-<span className='font-bold text-brand-600 text-lg tracking-tight'>ABGS</span
->
-<div className='flex gap-1'>
-{links.map(({ to, label, Icon }) => (
-<NavLink
-key={to} to={to}
-className={({ isActive }) =>
-`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-mediu
-m
-${isActive
-? 'bg-brand-50 text-brand-600'
-: 'text-gray-500 hover:text-gray-700'}`
-}
->
-<Icon className='w-4 h-4' />
-{label}
-</NavLink>
-))}
-</div>
-</div>
-</nav>
-);
+  const location = useLocation();
+
+  const linkClasses = (path) =>
+    `px-4 py-2 rounded-xl text-sm font-medium ${
+      location.pathname === path
+        ? "bg-indigo-100 text-indigo-600"
+        : "text-slate-500 hover:text-slate-700"
+    }`;
+
+  return (
+    <nav className="bg-white border-b border-slate-200 px-6 py-4">
+      <div className="max-w-6xl mx-auto flex items-center justify-between">
+        <Link to="/" className="text-2xl font-bold text-indigo-600">
+          ABGS
+        </Link>
+
+        <div className="flex items-center gap-3">
+          <Link to="/" className={linkClasses("/")}>
+            Dashboard
+          </Link>
+          <Link to="/checkin" className={linkClasses("/checkin")}>
+            Check-In
+          </Link>
+          <Link to="/summary" className={linkClasses("/summary")}>
+            Summary
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
 }

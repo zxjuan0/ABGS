@@ -1,33 +1,38 @@
-# app/main.py  
 from fastapi import FastAPI
-from app.database import Base, engine
-from app import models
-from app.routes import checkins, goals
-from app.routes import predict
 from fastapi.middleware.cors import CORSMiddleware
-
-
-Base.metadata.create_all(bind=engine)   # Creates tables on startup
+from pydantic import BaseModel
+from ml.predict import predict_dropout
 
 app = FastAPI(
-    title="ABGS - Behavior Adaptive Goal System",
+    title="ABGS - Adaptive Behavior Goal System",
     description="AI-powered habit and goal tracking API",
     version="1.0.0"
 )
 
-app.include_router(checkins.router)
-app.include_router(goals.router)
-app.include_router(predict.router)
-
 app.add_middleware(
-CORSMiddleware,
-allow_origins=['http://localhost:5173', 'https://your-app.vercel.app'],
-allow_methods=['*'],
-allow_headers=['*'],
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
+class UserFeatures(BaseModel):
+    streak_length: float
+    missed_days_last_7: float
+    checkin_hour_avg: float
+    engagement_freq: float
+    days_since_last: float
+    goal_age_days: float
+
 @app.get("/")
-def root(): return {"message": "ABGS running"}
+def root():
+    return {"message": "ABGS backend is running"}
 
 @app.get("/health")
-def health(): return {"status": "ok"}
+def health():
+    return {"status": "healthy"}
+
+@app.post("/predict")
+def predict(features: UserFeatures):
+    return predict_dropout(features.dict())
