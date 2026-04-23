@@ -1,12 +1,14 @@
-🧠 ABGS — Adaptive Behavior Goal System
+🧠 ABGS | Adaptive Behavior Goal System | 
 
 An AI-powered habit tracking platform that predicts user dropout risk and provides adaptive behavioral insights.
 
 🚀 Overview
 
-Most habit tracking applications are reactive — they show past progress but fail to anticipate future failure.
+Most habit tracking applications are reactive and lack interactive UI. 
+They show past progress but fail to anticipate future failure.
 
-ABGS (Adaptive Behavior Goal System) addresses this gap by combining behavioral data collection, machine learning prediction, and real-time user feedback. The system analyzes user engagement patterns and predicts the likelihood of habit dropout before it happens, enabling proactive intervention and smarter habit formation.
+ABGS (Adaptive Behavior Goal System) addresses this gap by combining behavioral data collection, machine learning prediction, and real-time user feedback.
+The system analyzes user engagement patterns and predicts the likelihood of habit dropout before it happens, enabling proactive intervention and smarter habit formation.
 
 🧩 Key Features
 Daily Check-In System
@@ -19,6 +21,8 @@ Risk Classification
 Users are categorized into Low, Medium, or High risk levels.
 Adaptive Insights Panel
 Provides recommendations based on predicted user behavior.
+
+
 🏗️ System Architecture
 
 Frontend (React)
@@ -117,12 +121,15 @@ Response:
 "risk_level": "medium"
 }
 
+
 🎥 Demo Flow
 User completes daily check-in
 Behavioral data is captured
 Data is sent to backend API
 ML model predicts dropout risk
 Dashboard displays risk badge, probability, and adaptive insight
+
+
 🧪 Future Improvements
 Database integration
 LLM-powered personalized coaching
@@ -130,7 +137,7 @@ User authentication
 Mobile optimization
 🎓 Academic Context
 
-This project was developed as a Capstone Project for Applied AI, demonstrating full-stack development, machine learning integration, and human-centered design.
+This project was developed as a Capstone Project for Applied AI, demonstrating full-stack development, machine learning integration, and people centered design.
 
 👤 Author
 
