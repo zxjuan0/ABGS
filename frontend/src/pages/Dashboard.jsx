@@ -12,7 +12,7 @@ const modelPerformance = [
     recall: "0.00%",
     f1: "0.00%",
     f1Value: 0,
-    note: "The accuracy looks perfect, but the test split did not include high-risk cases. This makes the result unreliable for dropout prediction.",
+    note: "The model appears perfect, but the test split did not include high-risk cases. As a result, it never learned to detect dropout, making the result unreliable.",
   },
   {
     name: "Model 2",
@@ -48,7 +48,7 @@ const modelPerformance = [
     recall: "94.87%",
     f1: "97.21%",
     f1Value: 97.21,
-    note: "This model adds habit type, activity type, difficulty, and Pomodoro behavior to support more specific interpretation.",
+    note: "This model incorporates habit type, activity context, difficulty level, and engagement patterns, allowing predictions to reflect how and why behaviors change over time.",
   },
 ];
 
@@ -200,7 +200,7 @@ export default function Dashboard() {
             Model Performance Dashboard
           </h1>
           <p className="text-slate-500 mt-3 max-w-4xl">
-            ABGS uses synthetic behavioral data to test how dataset size and data structure affect dropout-risk prediction. The goal is not only to predict risk, but to make those predictions easier to interpret and connect back to user behavior.
+            ABGS uses synthetic behavioral data to evaluate how dataset size and data structure impact dropout-risk prediction. The goal is not only to improve prediction performance, but to make those predictions interpretable and directly tied to user behavior.
           </p>
         </header>
 
@@ -208,22 +208,22 @@ export default function Dashboard() {
           <SummaryCard
             title="Models Tested"
             value="4"
-            text="Three dataset-size models plus one structured ABGS model."
+            text="Three baseline models trained on increasing dataset sizes, plus one structured ABGS model."
           />
           <SummaryCard
             title="Dataset Scale"
             value="200 to 200K"
-            text="Synthetic records were scaled to test performance changes."
+            text="Synthetic datasets were scaled to evaluate how model performance changes with increasing data volume."
           />
           <SummaryCard
             title="Model Type"
             value="Random Forest"
-            text="A classifier predicts whether a user is at risk of dropping off."
+            text="A Random Forest classifier predicts whether a user is at risk of behavioral drop-off."
           />
           <SummaryCard
             title="Primary Metric"
             value="F1 Score"
-            text="F1 balances precision and recall, which is important when risk cases are less common."
+            text="F1 score balances precision and recall, making it more reliable when high-risk cases are less frequent. Unlike accuracy, it ensures that both missed risks and false alarms are accounted for."
           />
         </section>
 
@@ -234,7 +234,7 @@ export default function Dashboard() {
                 Four-Model Comparison
               </h2>
               <p className="text-slate-500 mt-1 max-w-4xl">
-                Accuracy can be misleading when high-risk cases are rare. Precision shows how often risk predictions are correct, recall shows how many risk cases are found, and F1 score balances both. For this project, F1 is the clearest comparison metric because the goal is to detect risk without relying on accuracy alone.
+                Accuracy can be misleading when high-risk cases are rare. Precision measures how often risk predictions are correct, while recall measures how many risk cases are successfully identified. F1 score combines both, making it the most reliable metric for this experiment, where detecting risk accurately is more important than overall accuracy.
               </p>
             </div>
             <span className="text-xs font-semibold px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-100">
@@ -329,10 +329,10 @@ export default function Dashboard() {
               Main Finding
             </h2>
             <p className="text-slate-600 mb-4">
-              More data improved prediction quality, especially when moving from the small dataset to the larger synthetic datasets.
+              Increasing dataset size improves model performance, especially from small to large datasets. However, these gains begin to plateau, while improvements in data structure continue to enhance interpretability.
             </p>
             <p className="text-slate-600 mb-4">
-              The structured ABGS model goes one step further by connecting predictions to habit-specific context, making the output more useful for explanation and adaptive feedback.
+              The structured ABGS model extends this by connecting predictions to habit-specific context, making the output more useful for explanation and adaptive behavioral feedback.
             </p>
             <div className="rounded-xl bg-indigo-50 border border-indigo-100 p-4">
               <p className="text-sm font-semibold text-indigo-900">
@@ -347,10 +347,10 @@ export default function Dashboard() {
 
         <section className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-8">
           <h2 className="text-2xl font-bold text-slate-900 mb-3">
-            Feature Importance
+            What Drives Risk Predictions | Feature Selection
           </h2>
           <p className="text-slate-500 mb-6">
-            The strongest signals were tied to consistency and recency, which supports the idea that dropout risk is closely connected to recent engagement patterns.
+            The strongest predictors are tied to consistency and recency, reinforcing that dropout risk is closely linked to recent engagement patterns.
           </p>
 
           <div className="space-y-4">
@@ -386,7 +386,7 @@ export default function Dashboard() {
                 Client A
               </h2>
               <p className="text-sm text-slate-500 mt-1">
-                Expand to view habit history, model predictions, trend changes, and adaptive support suggestions.
+                Expand to explore a simulated user, including behavioral trends, model predictions, and adaptive recommendations.
               </p>
             </div>
 
@@ -567,15 +567,15 @@ export default function Dashboard() {
                 </h3>
 
                 <p className="text-sm text-indigo-900 mt-2">
-                  Client A is simulated, but the prediction cards are generated through backend calls to trained models.
+                  Client A is simulated, but all predictions are generated in real time using trained models from the backend.
                 </p>
 
                 <p className="text-sm text-indigo-900 mt-3">
-                  The case shows that risk is not just a yes-or-no outcome. It changes over time as engagement, missed days, and habit context shift.
+                  This case shows that risk is not a binary outcome. It evolves over time as engagement, missed activity, and context shift.
                 </p>
 
                 <p className="text-sm text-indigo-900 mt-3">
-                  ABGS is designed to support adaptive behavior by identifying early signals of disengagement and suggesting practical adjustments before a habit fully drops off.
+                  ABGS is designed to identify early signals of disengagement and provide adaptive, behavior-aware support before a habit fully drops off.
                 </p>
               </div>
             </div>
