@@ -23,6 +23,9 @@ export default api;
 export const getPrediction = (payload) =>
   api.post("/predict", payload).then((r) => r.data);
 
+export const predictClientA = (payload) =>
+  api.post("/predict/client-a", payload).then((r) => r.data);
+
 export const getGoals = () =>
   api.get("/goals").then((r) => r.data);
 

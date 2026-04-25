@@ -1,8 +1,14 @@
-# .gitignore
+# Python
 venv/
 __pycache__/
 *.pyc
-*.db
+
+# Node
+node_modules/
+
+# Env
 .env
-ml/models/*.joblib
+
+# OS
 .DS_Store
+Thumbs.db
