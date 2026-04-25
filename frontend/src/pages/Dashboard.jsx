@@ -134,12 +134,12 @@ export default function Dashboard() {
     async function loadPrediction() {
       try {
         const payload = {
-          streak_length: 7,
+          streak_length: 3,
           missed_days_last_7: 2,
-          checkin_hour_avg: 18,
-          engagement_freq: 0.65,
-          days_since_last: 1,
-          goal_age_days: 30,
+          checkin_hour_avg: 4,
+          engagement_freq: 22,
+          days_since_last: 0.35,
+          goal_age_days: 25,
         };
 
         const data = await getPrediction(payload);
@@ -231,7 +231,7 @@ export default function Dashboard() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
             <div>
               <h2 className="text-2xl font-bold text-slate-900">
-                Four-Model Comparison
+                4 Model Comparison
               </h2>
               <p className="text-slate-500 mt-1 max-w-4xl">
                 Accuracy can be misleading when high-risk cases are rare. Precision measures how often risk predictions are correct, while recall measures how many risk cases are successfully identified. F1 score combines both, making it the most reliable metric for this experiment, where detecting risk accurately is more important than overall accuracy.
@@ -269,7 +269,7 @@ export default function Dashboard() {
 
                   <div className="border-t border-slate-200 pt-4">
                     <p className="text-sm font-semibold text-slate-800 mb-2">
-                      Baseline Prediction
+                      Example Scenario
                     </p>
 
                     {loadingPrediction && (
