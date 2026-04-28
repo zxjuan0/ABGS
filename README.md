@@ -1,186 +1,193 @@
-# 🧠 ABGS | Adaptive Behavior Goal System |
+ABGS | Adaptive Behavior Goal System
 
-An AI-powered habit tracking platform that predicts user dropout risk and provides adaptive behavioral insights.
+An AI-powered habit tracking platform that predicts user dropout risk and provides behavior-aware, interpretable insights.
 
----
+Overview
 
-## 🚀 Overview
+Most habit tracking applications are reactive. They display past progress but fail to anticipate when users may disengage or explain why behaviors change.
 
-Most habit tracking applications are reactive and lack interactive UI.  
-They show past progress but fail to anticipate future failure.
+ABGS (Adaptive Behavior Goal System) addresses this gap by combining synthetic behavioral data, machine learning prediction, and structured, habit-aware features.
 
-ABGS (Adaptive Behavior Goal System) addresses this gap by combining behavioral data collection, machine learning prediction, and real-time user feedback.  
-The system analyzes user engagement patterns and predicts the likelihood of habit dropout before it happens, enabling proactive intervention and smarter habit formation.
+The system not only predicts dropout risk, but connects predictions to specific behavioral patterns, allowing for more meaningful and actionable insights.
 
----
+Experiment Goal
 
-## 🧩 Key Features
+This project explores two core questions.
 
-**Daily Check-In System**  
+Does increasing dataset size improve model performance?
+
+Does structured behavioral data improve interpretability?
+
+To evaluate this, four models were trained and compared using synthetic datasets of increasing size and complexity.
+
+Key Findings
+
+Model performance improves significantly as dataset size increases, particularly when moving from small to large datasets.
+
+However, performance gains begin to stabilize at higher scales.
+
+The structured ABGS model achieves the strongest performance and, more importantly, provides behavior-specific insights rather than generic predictions.
+
+More data improves performance, but better data structure improves understanding.
+
+Key Features
+
+Daily Check-In System
 Users log completed habits through a clean, interactive interface.
 
-**Behavior Tracking Dashboard**  
-Displays streaks, progress, and weekly trends.
+Model Comparison Dashboard
+Displays performance across four models using F1 score and evaluation metrics.
 
-**Machine Learning Prediction**  
-A trained model analyzes behavioral features to estimate dropout probability.
+Machine Learning Prediction
+Models analyze behavioral features to estimate dropout probability.
 
-**Risk Classification**  
+Risk Classification
 Users are categorized into Low, Medium, or High risk levels.
 
-**Adaptive Insights Panel**  
-Provides recommendations based on predicted user behavior.
+Client A Simulation
+A simulated user scenario demonstrates how models behave over time, including engagement trends and risk progression.
 
----
+Adaptive Insights
+Structured model outputs allow recommendations tied to specific habits and behaviors.
 
-## 🏗️ System Architecture
-Frontend (React)
+System Architecture
+
+Frontend (React + Vite)
 ↓
 API Layer (Axios)
 ↓
 Backend (FastAPI)
 ↓
-ML Model (Random Forest)
+ML Models (Random Forest)
 ↓
-Prediction Output → UI Dashboard
+Prediction Engine
+↓
+Dashboard Output
 
+Machine Learning Model
 
----
+Model Type: Random Forest Classifier
+Training Data: Synthetic behavioral dataset
 
-## 🧠 Machine Learning Model
+Models 1–3 use a shared feature set to evaluate the effect of dataset size on performance.
 
-Model Type: Random Forest Classifier  
-Training Data: Simulated user habit behavior dataset  
+Model 4 (ABGS) introduces structured features, including habit type, activity context, difficulty level, and engagement patterns.
 
-**Output:**
-- Dropout probability (0–1)  
-- Risk level classification (Low / Medium / High)
+Output
 
-**Features Used:**
-- streak_length  
-- missed_days_last_7  
-- checkin_hour_avg  
-- engagement_freq  
-- days_since_last  
-- goal_age_days  
+Dropout probability (0–1)
+Risk classification (Low / Medium / High)
+(Model 4) Behavior-specific interpretation
 
----
+Features Used
 
-## 🖥️ Tech Stack
+streak_length
+missed_days_last_7
+checkin_hour_avg
+engagement_freq
+days_since_last
+goal_age_days
 
-**Frontend:**
-- React (Vite)  
-- Tailwind CSS  
-- Recharts  
-- Axios  
+Key Insight
 
-**Backend:**
-- FastAPI  
-- Python  
+Increasing dataset size improves prediction performance, but does not fully explain user behavior.
 
-**Machine Learning:**
-- Scikit-learn  
-- Pandas  
-- NumPy  
-- Joblib  
+The ABGS model introduces structured data that allows predictions to reflect how and why behaviors change, improving interpretability and usefulness.
 
----
+Tech Stack
 
-## 📂 Project Structure
+Frontend:
+React (Vite)
+Tailwind CSS
+Recharts
+Axios
+
+Backend:
+FastAPI
+Python
+
+Machine Learning:
+Scikit-learn
+Pandas
+NumPy
+Joblib
+
+Deployment:
+Vercel (Frontend)
+Railway (Backend)
+
+Project Structure
+
 ABGS/
-├── app/ (FastAPI backend)
-├── ml/ (ML model + training)
-├── frontend/ (React frontend)
+├── app/
+├── ml/
+│ ├── models/
+│ ├── data/
+│ └── train_all_models.py
+├── frontend/
 ├── data/
 └── README.md
 
+Setup Instructions
 
+Backend:
 
----
-
-## ⚙️ Setup Instructions
-
-**Backend:**
-
-cd ABGS  
-python -m venv venv  
-venv\Scripts\activate  
-pip install -r requirements.txt  
+cd ABGS
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
 
 Run backend:
 
-uvicorn app.main:app --reload  
+uvicorn app.main:app --reload
 
----
+Frontend:
 
-**Frontend:**
+cd frontend
+npm install
+npm run dev
 
-cd frontend  
-npm install  
-npm run dev  
+Frontend runs on:
+http://localhost:5173
 
-Frontend runs on:  
-http://localhost:5173  
+API Endpoints
 
----
+POST /predict
 
-## 🔌 API Endpoint
+POST /predict/client-a
 
-POST /predict  
+Used for model comparison and Client A simulation.
 
-**Request:**
-{
-"streak_length": 7,
-"missed_days_last_7": 2,
-"checkin_hour_avg": 18,
-"engagement_freq": 0.65,
-"days_since_last": 1,
-"goal_age_days": 30
-}
+Demo Flow
 
+User completes daily check-in
 
-**Response:**
-{
-"dropout_probability": 0.62,
-"risk_level": "medium"
-}
+Behavioral data is captured
 
+Data is sent to backend API
 
----
+Models generate predictions
 
-## 🎥 Demo Flow
+Dashboard displays model comparison, risk classification, and behavioral insights
 
-- User completes daily check-in  
-- Behavioral data is captured  
-- Data is sent to backend API  
-- ML model predicts dropout risk  
-- Dashboard displays risk badge, probability, and adaptive insight  
+Simulation Note
 
----
+All datasets used in this project are synthetic and were generated to simulate realistic habit-tracking behavior.
 
-## 🧪 Future Improvements
+This allows controlled experimentation on dataset scaling, feature structure, and model interpretability.
 
-- Database integration  
-- LLM-powered personalized coaching  
-- User authentication  
-- Mobile optimization  
+Academic Context
 
----
+This project was developed as a Capstone Project for Applied AI, demonstrating full-stack development, machine learning integration, and behavior-aware system design.
 
-## 🎓 Academic Context
+Author
 
-This project was developed as a Capstone Project for Applied AI, demonstrating full-stack development, machine learning integration, and people-centered design.
+Juan Pulido
+Applied AI
+Miami Dade College
 
----
+Final Note
 
-## 👤 Author
+ABGS demonstrates how predictive systems can move beyond accuracy to become more interpretable and behavior-aware.
 
-Juan Pulido  
-Applied AI  
-Miami Dade College  
-
----
-
-## 📌 Final Note
-
-ABGS demonstrates how AI can move beyond tracking behavior to predicting and improving it, enabling smarter and more adaptive user experiences, simply by engaging in  positive reinforcement learning and friendly user interface.
+By combining structured data with machine learning, the system transforms risk prediction into a tool for understanding and improving user behavior.
